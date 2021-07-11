@@ -41,15 +41,15 @@
 /* Begin PBXFileReference section */
 		091BA8217AA3525C11F6FEB5831AB9A3 /* qr-code-scanner-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "qr-code-scanner-ios-Info.plist"; sourceTree = "<group>"; };
 		0BF53579E7D940B4592397314667EB1F /* qr-code-scanner-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "qr-code-scanner-ios.debug.xcconfig"; sourceTree = "<group>"; };
-		10D3147D64C90CBC1AB2D15EE8E3213C /* qr_code_scanner_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = qr_code_scanner_ios.framework; path = "qr-code-scanner-ios.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		10D3147D64C90CBC1AB2D15EE8E3213C /* qr_code_scanner_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = qr_code_scanner_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CF62FB653D274B6649F7BE46BA85A76 /* qr-code-scanner-ios-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "qr-code-scanner-ios-prefix.pch"; sourceTree = "<group>"; };
 		3099B2F26436A262F4C148E5DF0731B5 /* QRScannerError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QRScannerError.swift; path = "qr-code-scanner-ios/Classes/QRScannerError.swift"; sourceTree = "<group>"; };
-		311C4CACE99D5EC1F812AB1258C1A364 /* qr-code-scanner-ios.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = "qr-code-scanner-ios.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		35D37D3D52D35CAFA2F3DAC0E9A204F2 /* qr-code-scanner-ios.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "qr-code-scanner-ios.bundle"; path = "qr-code-scanner-ios-qr-code-scanner-ios.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		36AFFACCDA47E898D4EE2D9B4BE3B628 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		311C4CACE99D5EC1F812AB1258C1A364 /* qr-code-scanner-ios.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = "qr-code-scanner-ios.podspec"; sourceTree = "<group>"; tabWidth = 2; };
+		35D37D3D52D35CAFA2F3DAC0E9A204F2 /* qr-code-scanner-ios.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "qr-code-scanner-ios.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		36AFFACCDA47E898D4EE2D9B4BE3B628 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		38A5B9FF465B85EB61FF99B64D61FE9B /* qr-code-scanner-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "qr-code-scanner-ios-dummy.m"; sourceTree = "<group>"; };
 		3D4ECAD692E31DF6CBF9774807DDAB16 /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "qr-code-scanner-ios/Assets/Images.xcassets"; sourceTree = "<group>"; };
-		50C76E98EFE00A73858C373FF78DC3D9 /* Pods_qr_code_scanner_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_qr_code_scanner_ios_Example.framework; path = "Pods-qr-code-scanner-ios_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50C76E98EFE00A73858C373FF78DC3D9 /* Pods_qr_code_scanner_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_qr_code_scanner_ios_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55D581840F6FCE583487FB38420FA9EB /* Pods-qr-code-scanner-ios_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-qr-code-scanner-ios_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		5A7621C7D4D8AEF8BBF7A9D036661D4E /* QRScannerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QRScannerView.swift; path = "qr-code-scanner-ios/Classes/QRScannerView.swift"; sourceTree = "<group>"; };
 		5AE383CF5EB092B43B309D66838848D4 /* Pods-qr-code-scanner-ios_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-qr-code-scanner-ios_Example-frameworks.sh"; sourceTree = "<group>"; };
@@ -60,8 +60,8 @@
 		893AF0957DA39B23DCC0CA12FC62061D /* Pods-qr-code-scanner-ios_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-qr-code-scanner-ios_Example.modulemap"; sourceTree = "<group>"; };
 		8AFC2DC3EF8EA035573760F1BD4D0887 /* Pods-qr-code-scanner-ios_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-qr-code-scanner-ios_Example-dummy.m"; sourceTree = "<group>"; };
 		8D2712CF8EE5B71AFC4F4594425E656E /* BinaryKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BinaryKit.swift; path = "qr-code-scanner-ios/Classes/BinaryKit.swift"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A3A2BC949425D8B1D99E69E45543388B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A3A2BC949425D8B1D99E69E45543388B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B6F75779F4F9C7FB37E6C0BAF76A0476 /* qr-code-scanner-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "qr-code-scanner-ios.modulemap"; sourceTree = "<group>"; };
 		BD30CEC9E0266791337034CE84C739F4 /* QRScanner.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QRScanner.h; path = "qr-code-scanner-ios/Classes/QRScanner.h"; sourceTree = "<group>"; };
 		C40E1D69853003674E9C56F60EBE785B /* Pods-qr-code-scanner-ios_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-qr-code-scanner-ios_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -617,8 +617,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E29DDFA269ADCA90007B713 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29DDF9269ADCA90007B713 /* ViewController.swift */; };
-		0E29DDFE269AE5FC0007B713 /* qr-code-scanner-ios.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0E29DDFD269AE5FC0007B713 /* qr-code-scanner-ios.podspec */; };
+		0E29DE00269AFD6A0007B713 /* qr-code-scanner-ios.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0E29DDFF269AFD6A0007B713 /* qr-code-scanner-ios.podspec */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -18,7 +18,7 @@
 
 /* Begin PBXFileReference section */
 		0E29DDF9269ADCA90007B713 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0E29DDFD269AE5FC0007B713 /* qr-code-scanner-ios.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "qr-code-scanner-ios.podspec"; path = "../../qr-code-scanner-ios.podspec"; sourceTree = "<group>"; };
+		0E29DDFF269AFD6A0007B713 /* qr-code-scanner-ios.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "qr-code-scanner-ios.podspec"; path = "../qr-code-scanner-ios.podspec"; sourceTree = "<group>"; };
 		22D017655BE011411C75C582 /* Pods-qr-code-scanner-ios_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qr-code-scanner-ios_Tests.release.xcconfig"; path = "Target Support Files/Pods-qr-code-scanner-ios_Tests/Pods-qr-code-scanner-ios_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4FF935AFEDB46C1B8424CDF5 /* Pods_qr_code_scanner_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_qr_code_scanner_ios_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58584721385397AA3A98EF30 /* Pods-qr-code-scanner-ios_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qr-code-scanner-ios_Tests.debug.xcconfig"; path = "Target Support Files/Pods-qr-code-scanner-ios_Tests/Pods-qr-code-scanner-ios_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				0E29DDFD269AE5FC0007B713 /* qr-code-scanner-ios.podspec */,
+				0E29DDFF269AFD6A0007B713 /* qr-code-scanner-ios.podspec */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -178,7 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
-				0E29DDFE269AE5FC0007B713 /* qr-code-scanner-ios.podspec in Resources */,
+				0E29DE00269AFD6A0007B713 /* qr-code-scanner-ios.podspec in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
