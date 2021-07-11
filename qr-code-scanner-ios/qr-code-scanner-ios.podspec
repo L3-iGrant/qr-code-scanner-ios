@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'qr-code-scanner-ios'
-  s.version          = '0.4.0'
+  s.version          = '0.5.0'
   s.summary          = 'A short description of qr-code-scanner-ios.'
 
 # This description is used to generate tags and improve search results.
@@ -24,7 +24,7 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/L3-iGrant/qr-code-scanner-ios'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'rebinkpmna@gmail.com' => 'rebin@bluecast.ae' }
+  s.author           = { 'rebinkpmna@gmail.com' => 'rebin@igrant.io' }
   s.source           = { :git => 'https://github.com/L3-iGrant/qr-code-scanner-ios.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
