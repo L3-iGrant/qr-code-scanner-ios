@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'qr-code-scanner-ios'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of qr-code-scanner-ios.'
+  s.summary          = 'A simple QR code library where you can scan both text and binary embedded QR codes'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
