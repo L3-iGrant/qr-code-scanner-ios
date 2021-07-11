@@ -1,7 +1,7 @@
 {
   "name": "qr-code-scanner-ios",
   "version": "0.1.0",
-  "summary": "A short description of qr-code-scanner-ios.",
+  "summary": "A simple QR code library where you can scan both text and binary embedded QR codes",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/rebinkpmna@gmail.com/qr-code-scanner-ios",
   "license": {
