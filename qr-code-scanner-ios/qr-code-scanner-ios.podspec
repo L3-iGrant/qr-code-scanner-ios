@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'qr-code-scanner-ios'
-  s.version          = '0.3.0'
-  s.summary          = 'A simple QR code library where you can scan both text and binary embedded QR codes'
+  s.version          = '0.1.0'
+  s.summary          = 'A short description of qr-code-scanner-ios.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,20 +21,20 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/L3-iGrant/qr-code-scanner-ios'
+  s.homepage         = 'https://github.com/rebinkpmna@gmail.com/qr-code-scanner-ios'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'rebinkpmna@gmail.com' => 'rebin@bluecast.ae' }
-  s.source           = { :git => 'https://github.com/L3-iGrant/qr-code-scanner-ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/rebinkpmna@gmail.com/qr-code-scanner-ios.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
 
   s.source_files = 'qr-code-scanner-ios/Classes/**/*'
   
-   s.resource_bundles = {
-     'qr-code-scanner-ios' => ['qr-code-scanner-ios/Assets/*.xcassets']
-   }
+  # s.resource_bundles = {
+  #   'qr-code-scanner-ios' => ['qr-code-scanner-ios/Assets/*.png']
+  # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
