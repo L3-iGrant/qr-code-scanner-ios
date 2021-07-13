@@ -30,10 +30,10 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'qr-code-scanner-ios/Classes/*'
+  s.source_files = 'qr-code-scanner-ios/qr-code-scanner-ios/Classes/*'
   
    s.resource_bundles = {
-     'qr-code-scanner-ios' => ['qr-code-scanner-ios/Assets/*']
+     'qr-code-scanner-ios' => ['qr-code-scanner-ios/qr-code-scanner-ios/Assets/*']
    }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
