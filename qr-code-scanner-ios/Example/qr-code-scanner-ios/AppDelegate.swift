@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  qr-code-scanner-ios
 //
-//  Created by rebinkpmna@gmail.com on 07/11/2021.
+//  Created by rebinkpmna@gmail.com on 07/13/2021.
 //  Copyright (c) 2021 rebinkpmna@gmail.com. All rights reserved.
 //
 
