@@ -253,13 +253,24 @@ public class QRScannerView: UIView {
         let xPos = UIScreen.main.bounds.width * 0.191
         let yPos = UIScreen.main.bounds.height * 0.191
         focusImageView = UIImageView(frame: CGRect(x: xPos, y: yPos, width: width, height: width))
-        focusImageView.image = focusImage ?? UIImage(named: "scan_qr_focus", in: Bundle.main, compatibleWith: nil)
+        focusImageView.image = focusImage ?? UIImage(named: "scan_qr_focus", in: getResourcesBundle(vc:self.classForCoder), compatibleWith: nil)
         addSubview(focusImageView)
         
         qrCodeImageView = UIImageView()
         qrCodeImageView.contentMode = .scaleAspectFill
         addSubview(qrCodeImageView)
     }
+    
+    private func getResourcesBundle(vc: AnyClass) -> Bundle? {
+    //        return nil
+           
+           //SDK
+           let bundle = Bundle(for: vc.self)
+           guard let resourcesBundleUrl = bundle.resourceURL?.appendingPathComponent("qr-code-scanner-ios.bundle") else {
+               return nil
+           }
+           return Bundle(url: resourcesBundleUrl)
+       }
     
     private func addPreviewLayer() {
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -400,7 +411,6 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
         }
         decode(&binary,symbolVersion: symbolVersion)
     }
-    
     
 }
 
@@ -566,15 +576,4 @@ enum Mode: Int {
                 return nil
         }
     }
-    
-    func getResourcesBundle(vc: AnyClass) -> Bundle? {
-    //        return nil
-           
-           //SDK
-           let bundle = Bundle(for: vc.self)
-           guard let resourcesBundleUrl = bundle.resourceURL?.appendingPathComponent("qr-code-scanner-ios.bundle") else {
-               return nil
-           }
-           return Bundle(url: resourcesBundleUrl)
-       }
 }

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'qr-code-scanner-ios'
-  s.version          = '1.0.3'
+  s.version          = '1.0.4'
   s.summary          = 'A short description of qr-code-scanner-ios.'
 
 # This description is used to generate tags and improve search results.
@@ -30,10 +30,10 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'qr-code-scanner-ios/qr-code-scanner-ios/Classes/*'
+  s.source_files = 'qr-code-scanner-ios/Classes/**/*'
   
    s.resource_bundles = {
-     'qr-code-scanner-ios' => ['qr-code-scanner-ios/qr-code-scanner-ios/Assets/*']
+     'qr-code-scanner-ios' => ['qr-code-scanner-ios/Assets/*.xcassets']
    }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
