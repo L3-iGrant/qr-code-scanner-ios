@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Vision
 
 // MARK: - QRScannerViewDelegate
 public protocol QRScannerViewDelegate: AnyObject {
@@ -62,6 +63,29 @@ public class QRScannerView: UIView {
     
     private var readableObject: AVMetadataMachineReadableCodeObject?
     // MARK: - Public
+    
+    public func getQRCodeDataFromImage(image: UIImage) -> String?{
+        let QRCode = self.readQRCode(image)
+        if let ciImage:CIImage=CIImage(image:QRCode ?? image) {
+            var qrCodeLink = ""
+            let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
+
+            let features = detector?.features(in: ciImage) ?? []
+            for feature in features {
+                qrCodeLink += (feature as? CIQRCodeFeature)?.messageString ?? ""
+            }
+            if qrCodeLink=="" {
+                print("nothing")
+                return nil
+            }else{
+                print("message: \(qrCodeLink)")
+                return qrCodeLink
+            }
+        } else {
+            print("invalid QR Code")
+            return nil
+        }
+    }
     
     public func configure(delegate: QRScannerViewDelegate, input: Input = .default) {
         self.delegate = delegate
@@ -379,6 +403,27 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
+    public func readQRCodeData(in image: UIImage) {
+            guard let cgImage = image.cgImage else { return }
+
+            let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+            let request = VNDetectBarcodesRequest()
+            try? handler.perform([request])
+
+            guard let results = request.results as? [VNBarcodeObservation],
+                let result = results.first,
+                let descriptor = result.barcodeDescriptor as? CIQRCodeDescriptor
+                else { return }
+
+            // VNBarcodeObservation#payloadStringValue の値は
+            // AVMetadataMachineReadableCodeObject#stringValue とたぶん同じ
+            let StringValueLabel = result.payloadStringValue ?? "No payloadStringValue."
+            let symbolVersion = descriptor.symbolVersion
+            let errorCorrectedPayload = descriptor.errorCorrectedPayload
+            var byteArray = Binary.init(data: errorCorrectedPayload)
+            decode(&byteArray, symbolVersion: symbolVersion)
+        }
+    
     private func decode(_ binary: inout Binary, symbolVersion: Int) {
         let modeBitsLength = 4
         guard binary.bitsWithInternalOffsetAvailable(modeBitsLength) else { return }
@@ -443,7 +488,8 @@ extension QRScannerView: AVCaptureVideoDataOutputSampleBufferDelegate {
         CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
         return readQRCode(sampleBuffer)
     }
-    private func readQRCode(_ image: UIImage) -> UIImage? {
+    
+    public func readQRCode(_ image: UIImage) -> UIImage? {
         guard let ciImage = CIImage(image: image) else { return nil }
         let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
         guard let features = detector?.features(in: ciImage) else { return nil }
