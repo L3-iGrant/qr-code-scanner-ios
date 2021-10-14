@@ -421,10 +421,10 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
             let symbolVersion = descriptor.symbolVersion
             let errorCorrectedPayload = descriptor.errorCorrectedPayload
             var byteArray = Binary.init(data: errorCorrectedPayload)
-            decode(&byteArray, symbolVersion: symbolVersion)
+            decode(&byteArray, symbolVersion: symbolVersion,fromImage: true)
         }
     
-    private func decode(_ binary: inout Binary, symbolVersion: Int) {
+    private func decode(_ binary: inout Binary, symbolVersion: Int, fromImage: Bool = false) {
         let modeBitsLength = 4
         guard binary.bitsWithInternalOffsetAvailable(modeBitsLength) else { return }
         let supportedModes: [Mode] = [.structuredAppend, .byte, .endOfMessage]
@@ -451,7 +451,11 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.setTorchActive(isOn: false)
-                strongSelf.moveImageViews(qrCode: "", corners: self?.readableObject?.corners ?? [CGPoint.zero], binary: [UInt8](bytes))
+                if fromImage {
+                    strongSelf.success(qrCode,bytes: binary)
+                } else {
+                    strongSelf.moveImageViews(qrCode: "", corners: self?.readableObject?.corners ?? [CGPoint.zero], binary: [UInt8](bytes))
+                }
             }
         }
         decode(&binary,symbolVersion: symbolVersion)
