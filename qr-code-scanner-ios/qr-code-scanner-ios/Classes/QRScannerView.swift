@@ -452,7 +452,7 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
                 guard let strongSelf = self else { return }
                 strongSelf.setTorchActive(isOn: false)
                 if fromImage {
-                    strongSelf.success(qrCode,bytes: binary)
+                    strongSelf.success("",bytes: [UInt8](bytes))
                 } else {
                     strongSelf.moveImageViews(qrCode: "", corners: self?.readableObject?.corners ?? [CGPoint.zero], binary: [UInt8](bytes))
                 }
