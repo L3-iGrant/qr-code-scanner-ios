@@ -69,7 +69,7 @@ public class QRScannerView: UIView {
         if let ciImage:CIImage=CIImage(image:QRCode ?? image) {
             var qrCodeLink = ""
             let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
-
+            
             let features = detector?.features(in: ciImage) ?? []
             for feature in features {
                 qrCodeLink += (feature as? CIQRCodeFeature)?.messageString ?? ""
@@ -146,8 +146,8 @@ public class QRScannerView: UIView {
         guard let videoDevice = AVCaptureDevice.default(for: .video),
               videoDevice.hasTorch, videoDevice.isTorchAvailable,
               (metadataOutputEnable || videoDataOutputEnable) else {
-            return
-        }
+                  return
+              }
         try? videoDevice.lockForConfiguration()
         videoDevice.torchMode = isOn ? .on : .off
         videoDevice.unlockForConfiguration()
@@ -286,15 +286,15 @@ public class QRScannerView: UIView {
     }
     
     private func getResourcesBundle(vc: AnyClass) -> Bundle? {
-    //        return nil
-           
-           //SDK
-           let bundle = Bundle(for: vc.self)
-           guard let resourcesBundleUrl = bundle.resourceURL?.appendingPathComponent("qr-code-scanner-ios.bundle") else {
-               return nil
-           }
-           return Bundle(url: resourcesBundleUrl)
-       }
+        //        return nil
+        
+        //SDK
+        let bundle = Bundle(for: vc.self)
+        guard let resourcesBundleUrl = bundle.resourceURL?.appendingPathComponent("qr-code-scanner-ios.bundle") else {
+            return nil
+        }
+        return Bundle(url: resourcesBundleUrl)
+    }
     
     private func addPreviewLayer() {
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -403,26 +403,11 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
-    public func readQRCodeData(in image: UIImage) {
-            guard let cgImage = image.cgImage else { return }
-
-            let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
-            let request = VNDetectBarcodesRequest()
-            try? handler.perform([request])
-
-            guard let results = request.results as? [VNBarcodeObservation],
-                let result = results.first,
-                let descriptor = result.barcodeDescriptor as? CIQRCodeDescriptor
-                else { return }
-
-            // VNBarcodeObservation#payloadStringValue の値は
-            // AVMetadataMachineReadableCodeObject#stringValue とたぶん同じ
-            let StringValueLabel = result.payloadStringValue ?? "No payloadStringValue."
-            let symbolVersion = descriptor.symbolVersion
-            let errorCorrectedPayload = descriptor.errorCorrectedPayload
-            var byteArray = Binary.init(data: errorCorrectedPayload)
-            decode(&byteArray, symbolVersion: symbolVersion,fromImage: true)
-        }
+    
+    public func readQRCodeData(in image: UIImage, data: Data, symbolVersion: Int) {
+        var byteArray = Binary.init(bytes: [UInt8](data))
+        decode(&byteArray, symbolVersion: symbolVersion,fromImage: true)
+    }
     
     private func decode(_ binary: inout Binary, symbolVersion: Int, fromImage: Bool = false) {
         let modeBitsLength = 4
@@ -432,8 +417,8 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
         let modeBits = binary.next(bits: modeBitsLength)
         guard let mode = Mode(rawValue: modeBits),
               supportedModes.contains(mode) else {
-            return
-        }
+                  return
+              }
         guard mode != .endOfMessage else { return }
         if case .structuredAppend = mode {
         } else if case .byte = mode {
