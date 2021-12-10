@@ -383,7 +383,7 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
         if let metadataObject = metadataObjects.first {
             guard let readableObject = previewLayer?.transformedMetadataObject(for: metadataObject) as? AVMetadataMachineReadableCodeObject, metadataObject.type == .qr else { return }
             
-            if let stringValue = readableObject.stringValue {
+            if let stringValue = readableObject.stringValue && stringValue != "PK\u{03}\u{04}\n"{
                 metadataOutputEnable = false
                 videoDataOutputEnable = true
                 
