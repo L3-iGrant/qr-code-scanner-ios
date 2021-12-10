@@ -277,7 +277,7 @@ public class QRScannerView: UIView {
         let xPos = UIScreen.main.bounds.width * 0.191
         let yPos = UIScreen.main.bounds.height * 0.191
         focusImageView = UIImageView(frame: CGRect(x: xPos, y: yPos, width: width, height: width))
-        focusImageView.image = focusImage ?? UIImage(named: "scan_qr_focus", in: getResourcesBundle(vc:self.classForCoder), compatibleWith: nil)
+        focusImageView.image = focusImage ?? UIImage(named: "scan_qr_focus", in: Bundle.init(for: self.classForCoder), compatibleWith: nil)
         addSubview(focusImageView)
         
         qrCodeImageView = UIImageView()
