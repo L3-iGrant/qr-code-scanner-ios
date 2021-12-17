@@ -439,7 +439,18 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
                 if fromImage {
                     strongSelf.success("",bytes: [UInt8](bytes))
                 } else {
-                    strongSelf.moveImageViews(qrCode: "", corners: self?.readableObject?.corners ?? [CGPoint.zero], binary: [UInt8](bytes))
+                    // check if data is utf8 decodable or not.eg - Philippines cert is utf8 encoded and Indian cert is not
+                    let text = String(bytes: bytes, encoding: .utf8) ?? ""
+                    if text != "" {
+                        var charArray: [UInt8] = []
+                        for char in text {
+                            charArray.append(char.unicodeScalars.map { UInt8($0.value)}.reduce(0, +))
+                        }
+                        print(charArray)
+                        strongSelf.moveImageViews(qrCode: "", corners: self?.readableObject?.corners ?? [CGPoint.zero], binary: [UInt8](charArray))
+                    } else {
+                        strongSelf.moveImageViews(qrCode: "", corners: self?.readableObject?.corners ?? [CGPoint.zero], binary: [UInt8](bytes))
+                    }
                 }
             }
         }
