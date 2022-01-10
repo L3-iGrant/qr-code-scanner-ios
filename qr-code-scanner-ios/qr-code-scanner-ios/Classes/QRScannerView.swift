@@ -65,8 +65,8 @@ public class QRScannerView: UIView {
     // MARK: - Public
     
     public func getQRCodeDataFromImage(image: UIImage) -> String?{
-        let QRCode = self.readQRCode(image)
-        if let ciImage:CIImage=CIImage(image:QRCode ?? image) {
+//        let QRCode = self.readQRCode(image)
+        if let ciImage:CIImage=CIImage(image: image) {
             var qrCodeLink = ""
             let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
             
