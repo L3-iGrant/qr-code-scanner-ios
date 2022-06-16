@@ -396,7 +396,12 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
                 self.readableObject = readableObject
                 if let data = ((readableObject.value(forKeyPath: "_internal.basicDescriptor") as? [String:Any])?["BarcodeRawData"]) as? Data {
                     var byteArray = Binary.init(bytes: [UInt8](data))
-                    let symbolVersion = (((readableObject.value(forKeyPath: "_internal.basicDescriptor") as? [String:Any])?["CodeProperties"]as? [String:Any])?["SymbolVersion"] as? Int) ?? 0
+                    var symbolVersion = 0
+                    if let symblVer = (((readableObject.value(forKeyPath: "_internal.basicDescriptor") as? [String:Any])?["CodeProperties"]as? [String:Any])?["SymbolVersion"] as? Int) {
+                        symbolVersion = symblVer
+                    }else if let symblVer = ((readableObject.value(forKeyPath: "_internal.basicDescriptor") as? [String:Any])?["SymbolVersion"] as? Int) {// From iOS 15 onwards
+                        symbolVersion = symblVer
+                    }
                     decode(&byteArray, symbolVersion: symbolVersion)
                 }
             }
