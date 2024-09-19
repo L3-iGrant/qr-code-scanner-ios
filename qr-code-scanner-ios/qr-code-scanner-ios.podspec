@@ -31,11 +31,11 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '13.0'
 
 #  s.source_files = 'qr-code-scanner-ios/qr-code-scanner-ios/Classes/**/*'
-  s.source_files = '**/Classes/**/*.{h,m,swift,storyboard}'
+  s.source_files = '**/Sources/qr-code-scanner-ios/**/*.{h,m,swift,storyboard}'
 #    s.resource_bundles = {
 #       'qr-code-scanner-ios' => ['qr-code-scanner-ios/Assets/*.xcassets']
 #     }
-    s.resources = ["qr-code-scanner-ios/qr-code-scanner-ios/Assets/*.xcassets"]
+    s.resources = ["qr-code-scanner-ios/Sources/Assets/*.xcassets"]
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
