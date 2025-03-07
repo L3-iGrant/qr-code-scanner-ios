@@ -19,10 +19,13 @@ public protocol QRScannerViewDelegate: AnyObject {
     
     // Optional
     func qrScannerView(_ qrScannerView: QRScannerView, didChangeTorchActive isOn: Bool)
+    func qrScannerView(_ qrScannerView: QRScannerView, didChangeBrightness isDark: Bool)
+
 }
 
 public extension QRScannerViewDelegate where Self: AnyObject {
     func qrScannerView(_ qrScannerView: QRScannerView, didChangeTorchActive isOn: Bool) {}
+    func qrScannerView(_ qrScannerView: QRScannerView, didChangeBrightness isDark: Bool) {}
 }
 
 // MARK: - QRScannerView
@@ -308,6 +311,29 @@ public class QRScannerView: UIView {
     private func removePreviewLayer() {
         previewLayer?.removeFromSuperlayer()
     }
+
+ private func calculateBrightness(from pixelBuffer: CVPixelBuffer) -> CGFloat {
+        CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
+        defer { CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly) }
+        
+        guard let baseAddress = CVPixelBufferGetBaseAddress(pixelBuffer) else { return 0 }
+        let width = CVPixelBufferGetWidth(pixelBuffer)
+        let height = CVPixelBufferGetHeight(pixelBuffer)
+        let bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
+        var totalBrightness: CGFloat = 0
+        
+        for y in 0..<height {
+            for x in 0..<width {
+                let pixel = baseAddress.load(fromByteOffset: y * bytesPerRow + x * 4, as: UInt32.self)
+                let r = CGFloat((pixel >> 16) & 0xFF) / 255.0
+                let g = CGFloat((pixel >> 8) & 0xFF) / 255.0
+                let b = CGFloat(pixel & 0xFF) / 255.0
+                totalBrightness += (r + g + b) / 3.0
+            }
+        }
+        
+        return totalBrightness / CGFloat(width * height)
+    }
     
     private func moveImageViews(qrCode: String, corners: [CGPoint], binary: [UInt8]?) {
         assert(Thread.isMainThread)
@@ -479,6 +505,12 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
 extension QRScannerView: AVCaptureVideoDataOutputSampleBufferDelegate {
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         connection.videoOrientation = .portrait
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+        let brightness = calculateBrightness(from: pixelBuffer)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.qrScannerView(self!, didChangeBrightness: brightness < 0.5)
+        }
         guard videoDataOutputEnable else { return }
         guard let qrCodeImage = getImageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
         self.qrCodeImage = qrCodeImage
