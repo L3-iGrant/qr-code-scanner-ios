@@ -109,6 +109,8 @@ public class QRScannerView: UIView {
         addPreviewLayer()
         setupBlurEffectView()
         setupImageViews()
+        setupMaskOverlay()
+        feedbackGenerator.prepare()
     }
     
     public func startRunning() {
@@ -137,7 +139,14 @@ public class QRScannerView: UIView {
         }
         focusImageView.removeFromSuperview()
         qrCodeImageView.removeFromSuperview()
+        focusFrameNeedsLayout = true
         setupImageViews()
+        maskOverlayView.alpha = 0
+        insertSubview(maskOverlayView, belowSubview: focusImageView)
+        updateMaskCutout()
+        UIView.animate(withDuration: 0.4) {
+            self.maskOverlayView.alpha = 1
+        }
         qrCodeImage = nil
         videoDataOutputEnable = false
         metadataOutputEnable = true
@@ -181,6 +190,10 @@ public class QRScannerView: UIView {
     private var videoDataOutputEnable = false
     private var torchActiveObservation: NSKeyValueObservation?
     private var qrCodeImage: UIImage?
+    private let maskOverlayView = UIView()
+    private let maskShapeLayer = CAShapeLayer()
+    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+    private var focusFrameNeedsLayout = true
     private lazy var blurEffectView: UIVisualEffectView = {
         let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         blurEffectView.frame = self.bounds
@@ -278,14 +291,56 @@ public class QRScannerView: UIView {
     private func setupImageViews() {
         let width = UIScreen.main.bounds.width * 0.618
         let xPos = UIScreen.main.bounds.width * 0.191
-        let yPos = UIScreen.main.bounds.height * 0.191
+        let yPos: CGFloat
+        if focusFrameNeedsLayout {
+            let safeTop = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 44
+            let navBarHeight: CGFloat = 44
+            let availableHeight = UIScreen.main.bounds.height - safeTop - navBarHeight
+            yPos = safeTop + navBarHeight + (availableHeight - width) / 2 - 30
+        } else {
+            yPos = UIScreen.main.bounds.height * 0.191
+        }
         focusImageView = UIImageView(frame: CGRect(x: xPos, y: yPos, width: width, height: width))
         focusImageView.image = focusImage ?? UIImage(named: "scan_qr_focus", in: Bundle.module, compatibleWith: nil)
         addSubview(focusImageView)
-        
+
         qrCodeImageView = UIImageView()
         qrCodeImageView.contentMode = .scaleAspectFill
         addSubview(qrCodeImageView)
+    }
+
+    private func setupMaskOverlay() {
+        maskOverlayView.frame = bounds
+        maskOverlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        maskOverlayView.isUserInteractionEnabled = false
+        maskOverlayView.alpha = 0
+
+        maskShapeLayer.fillRule = .evenOdd
+        maskShapeLayer.fillColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        maskOverlayView.layer.addSublayer(maskShapeLayer)
+
+        insertSubview(maskOverlayView, belowSubview: focusImageView)
+        updateMaskCutout()
+
+        UIView.animate(withDuration: 0.4) {
+            self.maskOverlayView.alpha = 1
+        }
+    }
+
+    private func updateMaskCutout() {
+        let fullPath = UIBezierPath(rect: bounds)
+        let cutoutRect = focusImageView.frame
+        let cutoutPath = UIBezierPath(roundedRect: cutoutRect, cornerRadius: 4)
+        fullPath.append(cutoutPath)
+        maskShapeLayer.path = fullPath.cgPath
+        maskShapeLayer.frame = bounds
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        previewLayer?.frame = bounds
+        maskShapeLayer.frame = bounds
+        updateMaskCutout()
     }
     
     private func getResourcesBundle(vc: AnyClass) -> Bundle? {
@@ -364,6 +419,8 @@ public class QRScannerView: UIView {
         }
         maxSide += focusImagePadding * 2
         
+        focusFrameNeedsLayout = false
+
         UIView.animate(withDuration: animationDuration, animations: { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.focusImageView.frame = path.bounds
@@ -371,16 +428,30 @@ public class QRScannerView: UIView {
             strongSelf.focusImageView.frame.size = CGSize(width: maxSide, height: maxSide)
             strongSelf.focusImageView.center = center
             strongSelf.focusImageView.transform = CGAffineTransform.identity.rotated(by: degrees)
-            
+
             strongSelf.qrCodeImageView.frame = path.bounds
             strongSelf.qrCodeImageView.center = center
+
+            strongSelf.maskOverlayView.alpha = 0
         }, completion: { [weak self] _ in
             guard let strongSelf = self else { return }
             strongSelf.qrCodeImageView.image = strongSelf.qrCodeImage
             if strongSelf.isBlurEffectEnabled {
                 strongSelf.blurEffectView.isHidden = false
             }
-            strongSelf.success(qrCode,bytes: binary)
+
+            strongSelf.feedbackGenerator.impactOccurred()
+
+            let flash = UIView(frame: strongSelf.focusImageView.frame)
+            flash.backgroundColor = UIColor.systemGreen.withAlphaComponent(0.3)
+            flash.layer.cornerRadius = 4
+            strongSelf.addSubview(flash)
+            UIView.animate(withDuration: 0.3, animations: {
+                flash.alpha = 0
+            }, completion: { _ in
+                flash.removeFromSuperview()
+                strongSelf.success(qrCode, bytes: binary)
+            })
         })
     }
     
