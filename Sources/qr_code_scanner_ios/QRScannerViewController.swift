@@ -64,6 +64,12 @@ public class QRScannerViewController: UIViewController, QRScannerViewDelegate {
         savedNavBarTintColor = navigationController?.navigationBar.tintColor
         savedNavBarTitleAttributes = navigationController?.navigationBar.titleTextAttributes
 
+        // Disable iOS 26 default circular back button styling
+        navigationItem.hidesBackButton = true
+        if #available(iOS 26.0, *) {
+            navigationItem.backBarButtonItem?.hidesSharedBackground = true
+        }
+
         // Default to white — always readable over dark gradient overlay
         updateNavigationBarColors(isDark: true)
     }
