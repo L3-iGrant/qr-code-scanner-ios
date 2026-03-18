@@ -13,8 +13,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-qr-code-scanner-ios is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+qr-code-scanner-ios is available through [CocoaPods](https://cocoapods.org). To install it, add the following line to your Podfile:
 
 ```ruby
 pod 'qr-code-scanner-ios'
@@ -22,7 +21,7 @@ pod 'qr-code-scanner-ios'
 
 ## Author
 
-rebinkpmna@gmail.com, rebin@bluecast.ae
+support@igrant.io
 
 ## License
 
