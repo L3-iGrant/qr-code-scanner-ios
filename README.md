@@ -1,9 +1,10 @@
 # qr-code-scanner-ios
 
-[![CI Status](https://img.shields.io/travis/rebinkpmna@gmail.com/qr-code-scanner-ios.svg?style=flat)](https://travis-ci.org/rebinkpmna@gmail.com/qr-code-scanner-ios)
-[![Version](https://img.shields.io/cocoapods/v/qr-code-scanner-ios.svg?style=flat)](https://cocoapods.org/pods/qr-code-scanner-ios)
-[![License](https://img.shields.io/cocoapods/l/qr-code-scanner-ios.svg?style=flat)](https://cocoapods.org/pods/qr-code-scanner-ios)
-[![Platform](https://img.shields.io/cocoapods/p/qr-code-scanner-ios.svg?style=flat)](https://cocoapods.org/pods/qr-code-scanner-ios)
+[![Swift](https://img.shields.io/badge/Swift-5.0+-orange.svg?style=flat&logo=swift)](https://swift.org)
+[![iOS](https://img.shields.io/badge/iOS-13.0+-blue.svg?style=flat&logo=apple)](https://developer.apple.com/ios/)
+[![SPM](https://img.shields.io/badge/SPM-compatible-brightgreen.svg?style=flat&logo=swift)](https://swift.org/package-manager/)
+[![Release](https://img.shields.io/github/v/release/L3-iGrant/qr-code-scanner-ios?style=flat)](https://github.com/L3-iGrant/qr-code-scanner-ios/releases)
+[![License](https://img.shields.io/github/license/L3-iGrant/qr-code-scanner-ios?style=flat)](https://github.com/L3-iGrant/qr-code-scanner-ios/blob/main/LICENSE)
 
 ## Example
 
